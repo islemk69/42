@@ -6,7 +6,7 @@
 /*   By: ikaismou <ikaismou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:33:09 by hel-ouar          #+#    #+#             */
-/*   Updated: 2023/02/09 18:19:45 by ikaismou         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:27:27 by ikaismou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static int	init_here_doc(int argc, char **argv, char **envp, t_pipe *p)
 		line = get_next_line_gnl(0);
 		if (!line)
 			return(free(line), 0);
-		if (!ft_strncmp(argv[2], line, ft_strlen(argv[2])))
+		if (!ft_strncmp(argv[2], line, ft_strlen(argv[2])) 
+			&& line[ft_strlen(argv[2])] == "\n")
 		{
 			free(line);
 			break ;
