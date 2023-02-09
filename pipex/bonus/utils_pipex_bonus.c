@@ -6,7 +6,7 @@
 /*   By: ikaismou <ikaismou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:02:51 by hel-ouar          #+#    #+#             */
-/*   Updated: 2023/02/09 17:42:47 by ikaismou         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:37:30 by ikaismou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,3 @@ char	*ft_find_path(char **envp)
 		return (NULL);
 	return (envp[i] + 5);
 }
-
-
