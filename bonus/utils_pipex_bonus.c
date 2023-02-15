@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipex_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-ouar <hel-ouar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikaismou <ikaismou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:02:51 by hel-ouar          #+#    #+#             */
-/*   Updated: 2023/02/09 19:34:37 by hel-ouar         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:06:43 by ikaismou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,9 @@ void	init_tab(t_pipe *p)
 
 char	*ft_find_path(char **envp)
 {
-	int	i;
-
-	i = 0;
-	while (ft_strncmp("PATH", envp[i], 4))
-		i++;
-	if (!envp[i])
+	while (ft_strncmp("PATH", *envp, 4))
+		envp++;
+	if (!*envp)
 		return (NULL);
-	return (envp[i] + 5);
+	return (*envp + 5);
 }

@@ -6,7 +6,7 @@
 /*   By: ikaismou <ikaismou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 13:31:25 by hel-ouar          #+#    #+#             */
-/*   Updated: 2023/02/09 13:33:37 by ikaismou         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:52:11 by ikaismou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*ft_find_path(char **envp)
 
 void	pipex(t_pipe *p, char **argv, char **envp)
 {
+	if (pipe(p->fd) == -1)
+		return (error(p, "pipe"), exit(0));
 	p->id_first = fork();
 	if (p->id_first == -1)
 		return (error(p, "fork"));
@@ -40,28 +42,25 @@ void	pipex(t_pipe *p, char **argv, char **envp)
 	}
 	close(p->fd[0]);
 	close(p->fd[1]);
-	waitpid(p->id_first, NULL, 0);
-	waitpid(p->id_second, NULL, 0);
+	wait(NULL);
+	wait(NULL);
 }
 
-int	init_pipex(t_pipe *p, char **argv, char **envp)
+void	init_pipex(t_pipe *p, char **argv, char **envp)
 {
 	p->infile = open(argv[1], O_RDONLY);
 	p->outfile = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (p->infile < 0)
 		error(p, "error infile");
 	if (p->outfile < 0)
-		return (error(p, "error outfile"), exit(1), 0);
+		return (error(p, "error outfile"), exit(1));
 	p->path = ft_find_path(envp);
 	if (!p->path)
-		return (error(p, "error env"), exit(0), 0);
+		return (error(p, "error env"), exit(0));
 	p->paths = ft_split(p->path, ':');
 	if (!p->paths)
-		return (error(p, "error"), exit(0), 0);
-	if (pipe(p->fd) == -1)
-		return (error(p, "pipe"), exit(0), 0);
+		return (error(p, "error"), exit(0));
 	pipex(p, argv, envp);
-	return (1);
 }
 
 int	main(int argc, char **argv, char **envp)

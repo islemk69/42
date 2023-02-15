@@ -6,7 +6,7 @@
 /*   By: ikaismou <ikaismou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 14:25:09 by hel-ouar          #+#    #+#             */
-/*   Updated: 2023/02/14 17:37:34 by ikaismou         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:46:49 by ikaismou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_pipe
 	int		infile;
 	int		outfile;
 	int		id;
+	int		flg;
 	int		fd[2];
 	char	*path;
 	char	**paths;
@@ -51,7 +52,7 @@ void	first_child(char *str, t_pipe *p, char **envp);
 
 void	second_child(char *str, t_pipe *p, char **envp);
 
-int		init_pipex(t_pipe *p, char **argv, char **envp);
+void		init_pipex(t_pipe *p, char **argv, char **envp);
 
 void	pipex(t_pipe *p, char **argv, char **envp);
 

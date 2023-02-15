@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-ouar <hel-ouar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikaismou <ikaismou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:33:09 by hel-ouar          #+#    #+#             */
-/*   Updated: 2023/02/09 19:40:24 by hel-ouar         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:51:12 by ikaismou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int	init_here_doc(int argc, char **argv, char **envp, t_pipe *p)
 		if ((!ft_strncmp(argv[2], p->line, ft_strlen(argv[2]))
 				&& p->line[ft_strlen(argv[2])] == '\n'))
 			break ;
-		write(p->infile, p->line, ft_strlen(p->line));
+		if (write(p->infile, p->line, ft_strlen(p->line)))
+			return (free(p->line), free(p->line), 0);
 		free(p->line);
 	}
 	free(p->line);
