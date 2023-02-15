@@ -6,7 +6,7 @@
 /*   By: ikaismou <ikaismou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 12:46:22 by hel-ouar          #+#    #+#             */
-/*   Updated: 2023/02/15 14:33:23 by ikaismou         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:18:52 by ikaismou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	pipex_bonus(t_pipe *p, int argc, char **argv, char **envp)
 		close(p->fd[1]);
 		ft_free_tab(p->first_cmd);
 		free(p->cmd);
-		p->cmd = NULL;
 		p->i += 1;
 	}
 	p->nb_process++;
@@ -62,6 +61,7 @@ int	pipex_bonus(t_pipe *p, int argc, char **argv, char **envp)
 		wait(NULL);
 		p->x++;
 	}
+	p->cmd = NULL;
 	p->first_cmd = NULL;
 	free_pipex(p);
 	return (1);
